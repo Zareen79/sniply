@@ -2,8 +2,6 @@
 
 namespace Younes0\Sniply;
 
-use GuzzleHttp\Client;
-
 class Client 
 {
 
@@ -13,7 +11,7 @@ class Client
 
 	public function __construct($accessToken)
 	{
-		$this->httpClient = new Client(array(
+		$this->httpClient = new \GuzzleHttp\Client(array(
 		    'base_url' => array($this->baseUrl, array('version' => null)),
 		    'defaults' => array(
 		        'headers' => array(
@@ -47,7 +45,7 @@ class Client
 	{
  		return $this->httpClient->post('snips/', array(
 			'body' => array( 
-				'url'     => $link,
+				'url'     => $url,
 				'message' => $message,
 			),
 		));
@@ -65,7 +63,7 @@ class Client
 	{
 	 	return $this->httpClient->post(sprintf('snips/%s/', $slug), array(
 			'body' => array( 
-				'url'     => $link,
+				'url'     => $url,
 				'message' => $message,
 			),
 		));	

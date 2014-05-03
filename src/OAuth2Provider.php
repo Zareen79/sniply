@@ -1,9 +1,10 @@
 <?php
 
 namespace Younes0\Sniply;
+
 use \League\OAuth2\Client\Token\AccessToken as AccessToken;
 
-class OAuth2Provider extends League\OAuth2\Client\Provider\AbstractProvider
+class OAuth2Provider extends \League\OAuth2\Client\Provider\AbstractProvider
 {
 
     public function __construct($options)
