@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "php": ">=5.3.0",
-        "guzzle/guzzle": "~4.0",
+        "guzzlehttp/guzzle": ">=4.0",
         "league/oauth2-client": "0.3.*@dev"
     },
     "keywords": [
