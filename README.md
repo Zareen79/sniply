@@ -57,6 +57,6 @@ $client->fetch() // Fetch All Snips Created By User
 $client->fetch('foO') // Get A Specific Snip
 
 $client->create($link, $message); //  Create a new snip
-$client->create('foO', link, $message); // Edit a snip
+$client->create('foO', $link, $message); // Edit a snip
 
 ```
