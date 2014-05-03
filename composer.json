@@ -12,12 +12,12 @@
         "api",
         "oauth2",
         "snip.ly",
-        "sniply",
+        "sniply"
     ],
     "authors": [
         {
             "name": "Younès El Biache",
-            "email": "younes.elbiache@gmail.com",
+            "email": "younes.elbiache@gmail.com"
         }
     ],
     "autoload": {
