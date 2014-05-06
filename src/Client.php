@@ -25,13 +25,13 @@ class Client
 	 * Fetch All Snips Created By User or Get A Specific Snip
 	 * 
 	 * @param  String $slug    The slug is the three-character identifier that is included in the snip's URL
-	 * @return Guzzle\Http\Message\Response Guzzle response object
+	 * @return Array|Guzzle\Http\Message\Response Guzzle response body|object
 	 */
-	public function fetch($slug = null)
+	public function fetch($slug = null, $body = true)
 	{
 		$url = $slug ? sprintf('snips/%s/', $slug) : 'snips/';
 
-		return $this->httpClient->get($url);
+		return $this->output($this->httpClient->get($url), $body);
 	}
 
 	/**
@@ -39,16 +39,18 @@ class Client
 	 * 
 	 * @param  String $url     The url that you would like to shorten
 	 * @param  String $message The text of the message that you would like to display in the snip. HTML messages are not supported
-	 * @return Guzzle\Http\Message\Response Guzzle response object
+	 * @return Array|Guzzle\Http\Message\Response Guzzle response body|object
 	 */
-	public function create($url, $message)
+	public function create($url, $message, $body = true)
 	{
- 		return $this->httpClient->post('snips/', array(
-			'body' => array( 
-				'url'     => $url,
-				'message' => $message,
-			),
-		));
+		return $this->output(
+ 			$this->httpClient->post('snips/', array(
+				'body' => array( 
+					'url'     => $url,
+					'message' => $message,
+				),
+			)
+		), $body);		
 	}
 
 	/**
@@ -57,16 +59,29 @@ class Client
 	 * @param  String $slug    The slug is the three-character identifier that is included in the snip's URL
 	 * @param  String $url     The url that you would like to shorten
 	 * @param  String $message The text of the message that you would like to display in the snip. HTML messages are not supported
-	 * @return Guzzle\Http\Message\Response Guzzle response object
+	 * @return Array|Guzzle\Http\Message\Response Guzzle response body|object 
 	 */
-	public function edit($slug, $url, $message)
+	public function edit($slug, $url, $message, $body = true)
 	{
-	 	return $this->httpClient->post(sprintf('snips/%s/', $slug), array(
-			'body' => array( 
-				'url'     => $url,
-				'message' => $message,
-			),
-		));	
+	 	return $this->output(
+	 		$this->httpClient->post(sprintf('snips/%s/', $slug), array(
+				'body' => array( 
+					'url'     => $url,
+					'message' => $message,
+				)
+			)
+		), $body);	
+	}
+
+	/**
+	 * [output description]
+	 * @param  Guzzle\Http\Message\Response $response Guzzle response object 
+	 * @param  boolean $body 
+	 * @return Array|Guzzle\Http\Message\Response Guzzle response body|object 
+	 */
+	protected function output($response, $body) 
+	{
+		return $body ? $response->json() : $response;
 	}
 
 }

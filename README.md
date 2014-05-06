@@ -1,9 +1,9 @@
-# Snip.ly utilities
+# Snip.ly PHP utilities
 
 ## Description
 
 - OAuth2 feature, uses <https://github.com/thephpleague/oauth2-client>
-- API Calls, uses <https://packagist.org/packages/guzzlehttp/guzzle>
+- API Calls, uses <https://github.com/guzzle/guzzle/>
 
 ## Install
 
@@ -57,6 +57,21 @@ $client->fetch() // Fetch All Snips Created By User
 $client->fetch('foO') // Get A Specific Snip
 
 $client->create($link, $message); //  Create a new snip
-$client->create('foO', $link, $message); // Edit a snip
+$client->edit('foO', $link, $message); // Edit a snip
 
 ```
+
+You can access to Guzzle Response object instead of body by setting `$body` to `false` (usually the last parameter, check the source)
+
+```php
+
+// outputs guzzle response body as array (parsed json)
+$response = $client->create($link, $message); 
+
+// ouputs guzzle response object
+$response = $client->create($link, $message, false);
+$response->getReasonPhrase(); // 'CREATED'
+echo $response->getBody(); // json
+```
+
+More informations on: <http://guzzle.readthedocs.org/en/latest/>
