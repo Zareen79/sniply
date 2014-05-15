@@ -2,8 +2,9 @@
 
 ## Description
 
+Tools for [Snip.ly](http://www.snip.ly)'s API, 
 - OAuth2 feature, uses <https://github.com/thephpleague/oauth2-client>
-- API Calls, uses <https://github.com/guzzle/guzzle/>
+- API Wrapper, uses <https://github.com/guzzle/guzzle/>
 
 ## Install
 
@@ -47,7 +48,9 @@ if ( ! isset($_GET['code'])) {
 }
 ```
 
-### API Calls
+### API Wrapper
+
+API methods: <http://snip.ly/api/>
 
 ```php
 
@@ -59,6 +62,20 @@ $client->fetch('foO') // Get A Specific Snip
 $client->create($link, $message); //  Create a new snip
 $client->edit('foO', $link, $message); // Edit a snip
 
+// optional parameters for Pro plans
+$client->create($link, $message, $optional = array(
+    'background_color' => '#fff',
+    'message_color'    => '#000',
+    'theme'            => 'fullwidth',
+    'show_sniply_logo' => 'true', // string
+    'button_action'    => array(
+        'text'             => $text,
+        'url'              => $url,
+        'background_color' => '#ff0000',
+        'text_color'       => '#fff',
+    ),
+));
+
 ```
 
 You can access to Guzzle Response object instead of body by setting `$body` to `false` (usually the last parameter, check the source)
@@ -69,9 +86,9 @@ You can access to Guzzle Response object instead of body by setting `$body` to `
 $response = $client->create($link, $message); 
 
 // ouputs guzzle response object
-$response = $client->create($link, $message, false);
+$response = $client->create($link, $message, $optional, false);
 $response->getReasonPhrase(); // 'CREATED'
 echo $response->getBody(); // json
 ```
 
-More informations on: <http://guzzle.readthedocs.org/en/latest/>
+More informations on: <http://guzzle.readthedocs.org/en/latest/http-messages.html#body>
