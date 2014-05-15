@@ -29,9 +29,9 @@ class Client
 	 */
 	public function fetch($slug = null, $body = true)
 	{
-		$url = $slug ? sprintf('snips/%s/', $slug) : 'snips/';
+		$path = $slug ? sprintf('snips/%s/', $slug) : 'snips/';
 
-		return $this->output($this->httpClient->get($url), $body);
+		return $this->output($this->httpClient->get($path), $body);
 	}
 
 	/**
@@ -72,10 +72,10 @@ class Client
 	 */
 	protected function createOrEdit($slug = null, $url, $message, $optional = array(), $body = true)
 	{
-		$url = $slug ? sprintf('snips/%s/', $slug) : 'snips/';
+		$path = $slug ? sprintf('snips/%s/', $slug) : 'snips/';
 
 		return $this->output(
-			$this->httpClient->post($url, array(
+			$this->httpClient->post($path, array(
 				'headers' => array('content-type' => 'application/json'),
 				'body' => json_encode(array_merge($optional, array(
 					'url' => $url,
