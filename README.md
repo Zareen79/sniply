@@ -25,7 +25,7 @@ Via Composer
 
 ```php
 
-$provider = new Younes0\Sniply\Client(array(
+$provider = new Younes0\Sniply\OAuth2Provider(array(
 	'clientId'     => 'XXXXXXXX',
 	'clientSecret' => 'XXXXXXXX',
 	'redirectUri'  => 'https://your-registered-redirect-uri/'
